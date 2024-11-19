@@ -64,3 +64,46 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Project Setup
+
+### Requirements
+
+- PHP >= (used version) 8.3
+- Composer
+- MySQL
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git@github.com:natasamisic/PHP-Laravel-Catalog.git
+cd PHP-Laravel-Catalog
+```
+2. Install all the dependencies using composer
+
+```bash
+composer install
+```
+3. Copy the example env file and make the required configuration changes in the .env file 
+
+```bash
+cp .env.example .env
+```
+4. Generate a new application key
+
+```bash
+php artisan key:generate
+```
+5. Run the database migrations to create the necessary tables in your database:
+
+```bash
+php artisan migrate
+```
+6. Start the local development server
+
+```bash
+php artisan serve
+```
+You can now access the server at http://localhost:8000
