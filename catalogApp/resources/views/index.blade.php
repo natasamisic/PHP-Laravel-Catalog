@@ -42,6 +42,10 @@
             @endforeach 
         </section>
 
+        <div class="pagination">
+            {{ $products->links('vendor.pagination.simple-default') }}
+        </div>
+
         <!-- Comments Section -->
         <section class="comments">
             <h3>Comments</h3>

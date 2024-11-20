@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(9);
         $comments = Comment::where('is_approved', true)->get();
         return view('index', compact('products', 'comments'));
     }
