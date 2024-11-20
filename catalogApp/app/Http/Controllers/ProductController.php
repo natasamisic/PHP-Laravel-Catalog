@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('index', compact('products'));
+        $comments = Comment::all();
+        return view('index', compact('products', 'comments'));
     }
 
     public function createProduct(Request $request) {
@@ -20,8 +22,9 @@ class ProductController extends Controller
             'image' => 'required'
         ]);
 
-        Product::create($fields);
-        session()->flash('product-success', 'Product created successfully!');
+        $newProduct = Product::create($fields);
+        $message = $newProduct ? 'Product created successfully!' : 'Failed to create the product!';
+        session()->flash('product-success', $message);
         return view('/add-product');
     }
 }

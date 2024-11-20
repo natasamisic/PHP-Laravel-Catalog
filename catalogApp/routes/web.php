@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/', [ProductController::class, 'index']);
@@ -24,5 +25,5 @@ Route::get('/logout', [UserController::class, 'logout']);
 
 Route::post('/create-product', [ProductController::class, 'createProduct']);
 
-Route::post('/submitComment', [UserController::class, 'submitComment']);
+Route::post('/submit-comment', [CommentController::class, 'submitComment']);
 

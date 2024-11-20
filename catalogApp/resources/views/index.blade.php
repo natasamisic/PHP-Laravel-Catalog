@@ -42,13 +42,18 @@
         <!-- Comments Section -->
         <section class="comments">
             <h3>Comments</h3>
-            
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <strong>{{ $comment->name }}</strong>:
+                    <p>{{ $comment->text }}</p>
+                </div>
+            @endforeach
         </section>
 
         <!-- Comment Form -->
         <section class="form">
             <h3>Leave a Comment</h3>
-            <form action="/submitComment" method="POST">
+            <form action="/submit-comment" method="POST">
                 @csrf
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
@@ -58,7 +63,7 @@
         </section>
         @if(session('comment-success'))
             <script>
-                alert('{{ session('success') }}');
+                alert('{{ session('comment-success') }}');
             </script>
         @endif
     </main>

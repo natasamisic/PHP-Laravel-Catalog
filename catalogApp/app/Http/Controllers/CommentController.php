@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -13,8 +14,15 @@ class CommentController extends Controller
             'text' => 'required'
         ]);
 
-        
-        session()->flash('comment-success', 'Products loaded successfully!');
-        return view('index');
+        $newComment = Comment::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'text' => $fields['text'],
+            'is_approved' => false, 
+        ]);
+
+        $message = $newComment ? 'Comment created successfully!' : 'Failed to submit the comment!';
+        session()->flash('comment-success', $message);
+        return redirect('/');
     }
 }
