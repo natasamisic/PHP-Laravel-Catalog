@@ -7,30 +7,10 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Product Catalog</h1>
-        <div>
-            @auth
-                <a href="/logout" class="link">Logout</a>
-            @else
-                <a href="/loginPage" class="link">Login</a>
-                <a href="/registerPage" class="link">Register</a>
-            @endauth
-        </div>
-        
-        
-    </header>
+
+    @include('layouts.header')
 
     <main>
-        @auth
-            <div>
-                <button onclick="window.location.href='/add-product';" class="green-button" style="margin: 10px;">Add New Product</button>
-            </div>
-            <div>
-                <button onclick="window.location.href='/show-comments-to-approve';" class="green-button" style="margin: 10px;">Approve comments</button>
-            </div>
-        @endauth
-
         <!-- Product Grid -->
         <section class="grid">
              @foreach ($products as $product)

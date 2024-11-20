@@ -7,21 +7,9 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Product Catalog</h1>        {{--      napravi header odvojeno --}}
-        <div>
-            @auth
-                <a href="/logout" class="link">Logout</a>
-                <a href="/" class="link">Home</a>
-            @else
-                <a href="/loginPage" class="link">Login</a>
-                <a href="/registerPage" class="link">Register</a>
-            @endauth
-        </div>
-        
-        
-    </header>
 
+    @include('layouts.header')
+    
     <main>
         <section class="form">
             <h2>Create New Product</h2>

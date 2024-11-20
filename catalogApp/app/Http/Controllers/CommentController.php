@@ -28,13 +28,13 @@ class CommentController extends Controller
 
     public function showCommentsToApprove() {
         $comments = Comment::where('is_approved', false)->get();
-        return view('comments-to-approve', compact('comments'));
+        return view('admin.comments-to-approve', compact('comments'));
     }
 
     public function approveComment($id) {
         $comment = Comment::find($id);
         if (!$comment) {
-            return redirect()->route('commentsToApprove')->with('approve-success', 'Comment not found!');
+            return redirect()->route('admin.commentsToApprove')->with('approve-success', 'Comment not found!');
         }
 
         $comment->is_approved = true;

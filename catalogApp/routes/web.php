@@ -15,7 +15,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 //Admin functions
-Route::get('/add-product', function () {return view('add-product');});
+Route::get('/add-product', function () {return view('admin.add-product');});
 Route::post('/create-product', [ProductController::class, 'createProduct']);
 Route::get('/show-comments-to-approve', [CommentController::class, 'showCommentsToApprove']);
 Route::put('/approve-comment/{id}', [CommentController::class, 'approveComment']);

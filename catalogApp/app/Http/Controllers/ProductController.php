@@ -25,6 +25,6 @@ class ProductController extends Controller
         $newProduct = Product::create($fields);
         $message = $newProduct ? 'Product created successfully!' : 'Failed to create the product!';
         session()->flash('product-success', $message);
-        return view('/add-product');
+        return view('admin.add-product');
     }
 }
