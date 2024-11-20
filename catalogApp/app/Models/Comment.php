@@ -9,8 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
 
-   public $timestamps = false;
+    protected $primaryKey = 'idcomment';
+    public $timestamps = false;
 
-   protected $table = 'comments';
-   protected $fillable = ['name', 'email', 'text', 'is_approved'];
+    protected $table = 'comments';
+    protected $fillable = ['name', 'email', 'text', 'is_approved'];
 }

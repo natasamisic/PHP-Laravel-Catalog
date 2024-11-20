@@ -25,4 +25,23 @@ class CommentController extends Controller
         session()->flash('comment-success', $message);
         return redirect('/');
     }
+
+    public function showCommentsToApprove() {
+        $comments = Comment::where('is_approved', false)->get();
+        return view('comments-to-approve', compact('comments'));
+    }
+
+    public function approveComment($id) {
+        $comment = Comment::find($id);
+        if (!$comment) {
+            return redirect()->route('commentsToApprove')->with('approve-success', 'Comment not found!');
+        }
+
+        $comment->is_approved = true;
+        $approved = $comment->save();
+        if(!$approved) {
+            session()->flash('approve-success', 'Failed to approve comment!');
+        }
+        return redirect('show-comments-to-approve');
+    }
 }

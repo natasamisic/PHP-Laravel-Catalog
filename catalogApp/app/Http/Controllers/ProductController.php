@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $comments = Comment::all();
+        $comments = Comment::where('is_approved', true)->get();
         return view('index', compact('products', 'comments'));
     }
 

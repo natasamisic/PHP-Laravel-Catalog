@@ -26,6 +26,9 @@
             <div>
                 <button onclick="window.location.href='/add-product';" class="green-button" style="margin: 10px;">Add New Product</button>
             </div>
+            <div>
+                <button onclick="window.location.href='/show-comments-to-approve';" class="green-button" style="margin: 10px;">Approve comments</button>
+            </div>
         @endauth
 
         <!-- Product Grid -->
