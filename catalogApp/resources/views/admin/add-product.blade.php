@@ -14,7 +14,7 @@
     <main>
         <section class="form">
             <h2>Create New Product</h2>
-            <form id="productForm" action="/create-product" method="POST">
+            <form id="productForm" action="/create-product" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Product Title:</label>
@@ -22,11 +22,11 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Short Description:</label>
-                    <textarea id="description" name="short_description" minlength="10" maxlength="255" rows="3" value="{{ old('short_description') }}" placeholder="Enter a short description" required></textarea>
+                    <textarea id="short_description" name="short_description" minlength="10" maxlength="255" rows="3" value="{{ old('short_description') }}" placeholder="Enter a short description" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="image">Image URL:</label>
-                    <input type="text" id="image" name="image" maxlength="500" value="{{ old('image') }}" placeholder="Enter product image URL" required>
+                    <label for="image">Image:</label>
+                    <input type="file" id="image" name="image" value="{{ old('image') }}" required>
                 </div>
                 <button type="submit" class="green-button">Create Product</button>
             </form>

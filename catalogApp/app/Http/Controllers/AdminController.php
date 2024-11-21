@@ -14,17 +14,28 @@ class AdminController extends Controller
         $fields = $request->validate([
             'title' => 'required|string|min:3|max:50',
             'short_description' => 'required|string|min:10|max:255',
-            'image' => 'required|string|max:500'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $newProduct = Product::create($fields);
-  
-        if(!$newProduct) {
-            session()->flash('product-error', 'Failed to create the product!');
-            return redirect('/add-product')->withInput();
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+        
+            $product = new Product();
+            $product->title = $fields['title'];
+            $product->short_description = $fields['short_description'];
+            $product->image =  'images/'.$imageName;
+            $newProduct = $product->save();
+    
+            if(!$newProduct) {
+                session()->flash('product-error', 'Failed to create the product!');
+            }else {
+                session()->flash('product-success', 'Product created successfully!');
+            }
+        } else {
+            session()->flash('product-error', 'No valid image file uploaded!');
         }
         
-        session()->flash('product-success', 'Product created successfully!');
         return redirect('/add-product');
     }
 

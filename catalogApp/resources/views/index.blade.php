@@ -16,7 +16,7 @@
         <section class="grid">
              @foreach ($products as $product)
                 <div class="product">
-                    <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                    <img src="{{ asset( $product->image) }}" alt="{{ $product->title }}">
                     <h2>{{ $product->title }}</h2>
                     <p>{{ $product->short_description }}</p>
                     @auth
