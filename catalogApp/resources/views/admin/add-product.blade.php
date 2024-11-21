@@ -18,25 +18,30 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">Product Title:</label>
-                    <input type="text" id="title" name="title" maxlength="50" placeholder="Enter product title" required>
+                    <input type="text" id="title" name="title" minlength="3" maxlength="50" value="{{ old('title') }}" placeholder="Enter product title" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Short Description:</label>
-                    <textarea id="description" name="short_description" maxlength="255" rows="3" placeholder="Enter a short description" required></textarea>
+                    <textarea id="description" name="short_description" minlength="10" maxlength="255" rows="3" value="{{ old('short_description') }}" placeholder="Enter a short description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Image URL:</label>
-                    <input type="text" id="image" name="image" maxlength="500" placeholder="Enter product image URL" required>
+                    <input type="text" id="image" name="image" maxlength="500" value="{{ old('image') }}" placeholder="Enter product image URL" required>
                 </div>
                 <button type="submit" class="green-button">Create Product</button>
             </form>
-        </section>
 
-        @if(session('product-success'))
-            <script>
-                alert('{{ session('product-success') }}');
-            </script>
-        @endif
+            @if(session('product-error'))
+            <div class="error-message">
+                {{ session('product-error') }}
+            </div>
+            @endif
+            @if(session('product-success'))
+                <div class="success-message">
+                    {{ session('product-success') }}
+                </div>
+            @endif
+        </section>
     </main>
 </body>
 </html>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', [AdminController::class, 'index']);
+Route::get('/', [UserController::class, 'index']);
 
 Route::get('/loginPage', function () {return view('login');});
 Route::get('/registerPage', function () {return view('register');});

@@ -8,13 +8,6 @@ use App\Models\Product;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        $products = Product::paginate(9, ['*'], 'product_pages');
-        $comments = Comment::where('is_approved', true)->get();
-        $comments = Comment::paginate(5, ['*'], 'comment_pages');
-        return view('index', compact('products', 'comments'));
-    }
 
     //Product related methods
     public function createProduct(Request $request) {
@@ -25,9 +18,14 @@ class AdminController extends Controller
         ]);
 
         $newProduct = Product::create($fields);
-        $message = $newProduct ? 'Product created successfully!' : 'Failed to create the product!';
-        session()->flash('product-success', $message);
-        return view('admin.add-product');
+  
+        if(!$newProduct) {
+            session()->flash('product-error', 'Failed to create the product!');
+            return redirect('/add-product')->withInput();
+        }
+        
+        session()->flash('product-success', 'Product created successfully!');
+        return redirect('/add-product');
     }
 
     public function deleteProduct($id) {

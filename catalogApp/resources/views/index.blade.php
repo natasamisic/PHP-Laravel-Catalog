@@ -61,6 +61,9 @@
                     <p>{{ $comment->text }}</p>
                 </div>
             @endforeach
+            <div class="pagination">
+                {{ $comments->links('vendor.pagination.semantic-ui') }}
+            </div>
         </section>
 
         @else
@@ -102,6 +105,7 @@
             @endif
         </section>
         @endauth
+        <br/>
     </main>
 </body>
 </html>
