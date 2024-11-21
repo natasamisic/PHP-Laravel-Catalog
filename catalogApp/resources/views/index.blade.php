@@ -50,7 +50,20 @@
             {{ $products->links('vendor.pagination.simple-default') }}
         </div>
 
-        <!-- Comments Section -->
+        @auth
+        <!-- Comments Section For Admin-->
+        <section class="comments">
+            <h3>Comments</h3>
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <strong>{{ $comment->name }}</strong> ({{ $comment->email }}):
+                    <p>{{ $comment->text }}</p>
+                </div>
+            @endforeach
+        </section>
+        
+        @else
+        <!-- Comments Section For User-->
         <section class="comments">
             <h3>Comments</h3>
             @foreach ($comments as $comment)
@@ -72,6 +85,8 @@
                 <button class="green-button">Submit</button>
             </form>
         </section>
+        @endauth
+        
         @if(session('comment-success'))
             <script>
                 alert('{{ session('comment-success') }}');

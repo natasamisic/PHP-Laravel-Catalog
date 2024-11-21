@@ -19,35 +19,31 @@ header h1 {
     padding-left: 10px;
 }
 
-header .link {
+header a {
     color: #fff;
     text-decoration: none;
     margin: 0 10px;
     font-size: 16px;
+    font-weight: bold;
     padding: 8px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
-header .link:hover {
-    background-color: #007bff;
+header a:hover {
+    background-color: #f0f0f0;
+    color: #000;
 }
 
 header div {
     margin-top: 15px;
 }
 
-/* Link */
-.link {
-    text-decoration: none;
-    color: #469efb;
-    font-size: 16px;
+.active {
+    color: white;
+    background-color: #4c4e4f;
     font-weight: bold;
-}
-
-.link:hover {
-    color: #1062b9;
-    text-decoration: underline;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Container for the grid */

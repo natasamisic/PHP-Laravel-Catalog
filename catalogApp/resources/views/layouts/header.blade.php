@@ -1,31 +1,14 @@
 <header>
     <h1>Welcome to the Product Catalog</h1>
     <div>
+        <a href="/" class="{{Request::is('/') ? 'active' : ''}}">Home</a>
         @auth
-            @if (Request::is('add-product'))
-                <a href="/" class="link">Home</a>
-                <a href="/show-comments-to-approve" class="link">Approve Comments</a>
-            @elseif (Request::is('show-comments-to-approve'))
-                <a href="/" class="link">Home</a>
-                <a href="/add-product" class="link">Add New Product</a>
-            @else
-                <a href="/" class="link">Home</a>
-                <a href="/add-product" class="link">Add New Product</a>
-                <a href="/show-comments-to-approve" class="link">Approve Comments</a>
-            @endif
-            <a href="/logout" class="link">Logout</a>
+            <a href="/add-product" class="{{Request::is('add-product') ? 'active' : ''}}">Add New Product</a>
+            <a href="/show-comments-to-approve" class="{{Request::is('show-comments-to-approve') ? 'active' : ''}}">Approve Comments</a>
+            <a href="/logout">Logout</a>
         @else
-            @if (Request::is('loginPage'))
-                <a href="/" class="link">Home</a>
-                <a href="/registerPage" class="link">Register</a>
-            @elseif (Request::is('registerPage'))
-                <a href="/" class="link">Home</a>
-                <a href="/loginPage" class="link">Login</a>
-            @else
-                <a href="/" class="link">Home</a>
-                <a href="/loginPage" class="link">Login</a>
-                <a href="/registerPage" class="link">Register</a>
-            @endif
+            <a href="/loginPage" class="{{Request::is('loginPage') ? 'active' : ''}}">Login</a>
+            <a href="/registerPage" class="{{Request::is('registerPage') ? 'active' : ''}}">Register</a>
         @endauth
     </div> 
 </header>
