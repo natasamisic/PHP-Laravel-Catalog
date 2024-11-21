@@ -15,8 +15,17 @@
             @endif
             <a href="/logout" class="link">Logout</a>
         @else
-            <a href="/loginPage" class="link">Login</a>
-            <a href="/registerPage" class="link">Register</a>
+            @if (Request::is('loginPage'))
+                <a href="/" class="link">Home</a>
+                <a href="/registerPage" class="link">Register</a>
+            @elseif (Request::is('registerPage'))
+                <a href="/" class="link">Home</a>
+                <a href="/loginPage" class="link">Login</a>
+            @else
+                <a href="/" class="link">Home</a>
+                <a href="/loginPage" class="link">Login</a>
+                <a href="/registerPage" class="link">Register</a>
+            @endif
         @endauth
     </div> 
 </header>
