@@ -18,9 +18,9 @@ class AdminController extends Controller
     //Product related methods
     public function createProduct(Request $request) {
         $fields = $request->validate([
-            'title' => 'required',
-            'short_description' => 'required',
-            'image' => 'required'
+            'title' => 'required|string|min:3|max:50',
+            'short_description' => 'required|string|min:10|max:255',
+            'image' => 'required|string|max:500'
         ]);
 
         $newProduct = Product::create($fields);
@@ -48,13 +48,15 @@ class AdminController extends Controller
     public function approveComment($id) {
         $comment = Comment::find($id);
         if (!$comment) {
-            return redirect()->route('admin.commentsToApprove')->with('approve-success', 'Comment not found!');
+            return redirect()->route('admin.commentsToApprove')->with('approve-error', 'Something went wrong!');
         }
 
         $comment->is_approved = true;
         $approved = $comment->save();
         if(!$approved) {
-            session()->flash('approve-success', 'Failed to approve comment!');
+            session()->flash('approve-error', 'Failed to approve comment!');
+        }else {
+            session()->flash('approve-success', 'Comment approved!');
         }
         return redirect('show-comments-to-approve');
     }

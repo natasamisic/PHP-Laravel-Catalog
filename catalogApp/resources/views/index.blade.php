@@ -61,7 +61,7 @@
                 </div>
             @endforeach
         </section>
-        
+
         @else
         <!-- Comments Section For User-->
         <section class="comments">
@@ -79,19 +79,23 @@
             <h3>Leave a Comment</h3>
             <form action="/submit-comment" method="POST">
                 @csrf
-                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="text" name="name" maxlength="255" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="text" rows="4" placeholder="Your Comment" required></textarea>
+                <textarea name="text" rows="4" maxlength="500" placeholder="Your Comment" required></textarea>
                 <button class="green-button">Submit</button>
             </form>
+            @if(session('comment-success'))
+            <div class="success-message">
+                {{ session('comment-success') }}
+              </div>
+            @endif
+            @if(session('comment-error'))
+                <div class="error-message">
+                    {{ session('comment-error') }}
+                </div>
+            @endif
         </section>
         @endauth
-        
-        @if(session('comment-success'))
-            <script>
-                alert('{{ session('comment-success') }}');
-            </script>
-        @endif
     </main>
 </body>
 </html>

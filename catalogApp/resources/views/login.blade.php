@@ -9,18 +9,25 @@
 </head>
 <body>
     @include('layouts.header')
-
+    
     <main>
         <!-- Login Form -->
         <section class="form-container">
             <h2>Login</h2>
             <form action="/login" method="POST">
                 @csrf
-                <input type="name" name="name" placeholder="Your Name" required>
+                <input type="name" name="name" value="{{ old('name') }}" placeholder="Your Name" required>
                 <input type="password" name="password" placeholder="Your Password" required>
                 <button type="submit">Login</button>
             </form>
-        </section>
+            {{-- <p>Don't have an account? <a href="/registerPage">Register here</a></p>  --}}
+            
+            @if(session('login-error'))
+            <div class="error-message">
+                {{ session('login-error') }}
+              </div>
+            @endif
+        </section>   
     </main>
 </body>
 </html>

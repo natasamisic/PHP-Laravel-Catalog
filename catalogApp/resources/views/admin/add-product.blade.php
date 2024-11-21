@@ -13,19 +13,19 @@
     <main>
         <section class="form">
             <h2>Create New Product</h2>
-            <form action="/create-product" method="POST">
+            <form id="productForm" action="/create-product" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="title">Product Title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter product title" required>
+                    <input type="text" id="title" name="title" maxlength="50" placeholder="Enter product title" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Short Description:</label>
-                    <textarea id="description" name="short_description" rows="3" placeholder="Enter a short description" required></textarea>
+                    <textarea id="description" name="short_description" maxlength="255" rows="3" placeholder="Enter a short description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Image URL:</label>
-                    <input type="text" id="image" name="image" placeholder="Enter product image URL" required>
+                    <input type="text" id="image" name="image" maxlength="500" placeholder="Enter product image URL" required>
                 </div>
                 <button type="submit" class="green-button">Create Product</button>
             </form>

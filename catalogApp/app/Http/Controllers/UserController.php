@@ -12,16 +12,16 @@ class UserController extends Controller
 
     public function login(Request $request) {
         $fields = $request->validate([
-            'name' => 'required',
-            'password' => 'required'
+            'name' => 'required|string',
+            'password' => 'required|string'
         ]);
 
         if (auth()->attempt(['name' => $fields['name'], 'password' => $fields['password']])) {
             $request->session()->regenerate();
             return redirect('/');    
         }
-
-        return redirect('/loginPage');
+        session()->flash('login-error', 'Username or password is wrong! Try again!');
+        return redirect('/loginPage')->withInput();
     }
 
     public function logout() {
@@ -31,24 +31,26 @@ class UserController extends Controller
 
     public function register(Request $request) {
         $fields = $request->validate([
-            'name' => ['required', Rule::unique('users', 'name')],
-            'email' => ['required', Rule::unique('users', 'email')],
-            'password' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:3'
         ]);
 
         $fields['password'] = bcrypt($fields['password']);
         $user = User::create($fields);
+        if(!$user) {
+            session()->flash('register-error', 'Something went wrong. Account was not created!');
+            return redirect('/registerPage')->withInput();
+        }
         auth()->login($user);
-
-        session()->flash('success', 'Registered successfully!');
         return redirect('/');
     }
 
     public function submitComment(Request $request) {
         $fields = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'text' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'text' => 'required|string|max:500'
         ]);
 
         $newComment = Comment::create([
@@ -58,8 +60,12 @@ class UserController extends Controller
             'is_approved' => false, 
         ]);
 
-        $message = $newComment ? 'Comment submitted successfully!' : 'Failed to submit the comment!';
-        session()->flash('comment-success', $message);
+        if(!$newComment) {
+            session()->flash('comment-error', 'Failed to submit the comment!');
+            return redirect('/')->withInput();
+        }
+        
+        session()->flash('comment-success', 'Comment submitted successfully!');
         return redirect('/');
     }
 }

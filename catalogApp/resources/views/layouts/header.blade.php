@@ -8,7 +8,7 @@
             <a href="/logout">Logout</a>
         @else
             <a href="/loginPage" class="{{Request::is('loginPage') ? 'active' : ''}}">Login</a>
-            <a href="/registerPage" class="{{Request::is('registerPage') ? 'active' : ''}}">Register</a>
+            {{-- <a href="/registerPage" class="{{Request::is('registerPage') ? 'active' : ''}}">Register</a> --}}
         @endauth
     </div> 
 </header>
