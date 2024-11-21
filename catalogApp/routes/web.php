@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
 
-Route::get('/', [ProductController::class, 'index']);
+Route::get('/', [AdminController::class, 'index']);
 
 Route::get('/loginPage', function () {return view('login');});
 Route::get('/registerPage', function () {return view('register');});
@@ -16,10 +15,11 @@ Route::get('/logout', [UserController::class, 'logout']);
 
 //Admin functions
 Route::get('/add-product', function () {return view('admin.add-product');});
-Route::post('/create-product', [ProductController::class, 'createProduct']);
-Route::get('/show-comments-to-approve', [CommentController::class, 'showCommentsToApprove']);
-Route::put('/approve-comment/{id}', [CommentController::class, 'approveComment']);
+Route::post('/create-product', [AdminController::class, 'createProduct']);
+Route::get('/show-comments-to-approve', [AdminController::class, 'showCommentsToApprove']);
+Route::put('/approve-comment/{id}', [AdminController::class, 'approveComment']);
+Route::delete('/delete-product/{id}', [AdminController::class, 'deleteProduct']);
 
 //User functions
-Route::post('/submit-comment', [CommentController::class, 'submitComment']);
+Route::post('/submit-comment', [UserController::class, 'submitComment']);
 

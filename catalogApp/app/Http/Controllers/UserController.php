@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -43,4 +44,22 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function submitComment(Request $request) {
+        $fields = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'text' => 'required'
+        ]);
+
+        $newComment = Comment::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'text' => $fields['text'],
+            'is_approved' => false, 
+        ]);
+
+        $message = $newComment ? 'Comment submitted successfully!' : 'Failed to submit the comment!';
+        session()->flash('comment-success', $message);
+        return redirect('/');
+    }
 }
