@@ -10,8 +10,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(9);
+        $products = Product::paginate(9, ['*'], 'product_pages');
         $comments = Comment::where('is_approved', true)->get();
+        $comments = Comment::paginate(5, ['*'], 'comment_pages');
         return view('index', compact('products', 'comments'));
     }
 

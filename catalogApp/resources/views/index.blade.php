@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 </head>
 <body>
 
@@ -47,7 +48,7 @@
         </section>
 
         <div class="pagination">
-            {{ $products->links('vendor.pagination.simple-default') }}
+            {{ $products->links('vendor.pagination.semantic-ui') }}
         </div>
 
         @auth
@@ -72,7 +73,12 @@
                     <p>{{ $comment->text }}</p>
                 </div>
             @endforeach
+            <div class="pagination">
+                {{ $comments->links('vendor.pagination.semantic-ui') }}
+            </div>
         </section>
+
+        
 
         <!-- Comment Form -->
         <section class="form">
